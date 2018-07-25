@@ -1020,30 +1020,52 @@ export const SampleQueries: SampleQuery[] = [
     "docLink": "http://localhost:29013/Api/Values/GET?id=0"
 }, 
 {
-    "category": "Azure",
+"category": "Azure Resource Graph",
+"method": "POST",
+"humanName": "initialization query",
+"requestUrl": "https://management.azure.com/providers/Microsoft.ResourcesTopology.PPE/resources?api-version=2017-10-05-preview",
+"docLink": "http://localhost:29013/Api/Values/GET?id=0",
+"postBody": "{'subscriptions': ['0b88dfdb-55b3-4fb0-b474-5b6dcbe6b2ef','1b51d7a0-d97f-456f-914e-18cdcbedf1ce','34e09169-36e2-4117-ae05-98b60ea39dc4','9859901f-eff8-418d-bea5-9ab865a222d3','a6383be3-f0e8-4968-93d5-10f2625f5bb5','b3f105bc-853e-4b0c-a8ec-dffd9e89e204','c1b3aa24-a329-430e-91d7-473f301521c1','a8183b2d-7a4c-45e9-8736-dac11b84ff14','04b6c4a0-bc75-4984-a699-9b9c55ae8d7c','54e18c35-3863-4a17-8e52-b5aa1e65847e','d0610b27-9663-4c05-89f8-5b4be01e86a5','788c400d-a3f9-4e73-b28f-6977c7845a44','14318ef1-1b03-4cb1-b842-0864d99c875f','dae41bd3-9db4-4b9b-943e-832b57cac828','02d59989-f8a9-4b69-9919-1ef51df4eff6','449bc1dd-3470-4804-ab56-2752595f01ab','422b6c61-95b0-4213-b3be-7282315df71d','77c83adc-24dd-4f34-b5be-3d64704edfc4','a7ac1802-c138-4a55-a6bf-25f9bd3336a5','bc8edd8f-a09f-499d-978d-6b5ed2f84852','8461ba26-20b2-420b-a70f-69c81efc6986','ed0a2d54-9ed3-4e7e-81ea-65ebc56abeec','bc2a9fec-0230-42ed-a5e5-fd323011a32b','a8e0ef2f-b553-47d4-bb01-1a80f8c51ca0','c2864b48-78be-42a1-8ff6-4b50f6e1e7e6','77a79ff3-de8a-49a7-a804-b40e968033f6','c65b1e57-40c1-4ba5-ae15-e32311d7e31c','72930a30-8e57-4e97-98fe-02c1023ab43a','e78961ba-36fe-4739-9212-e3031b4c8db7','42a37486-f3f5-4b3d-8279-7c1a797f438f','acc3e6fc-7c70-46a9-8d3d-a50f58b72b07']}"
+},  
+{
+"category": "Azure Resource Graph",
+"method": "GET",
+"humanName": "get VM type summary",
+"requestUrl": "https://management.azure.com/providers/Microsoft.ResourcesTopology.PPE/resources?api-version=2017-10-05-preview&filter= where type == \"microsoft.compute/virtualmachines\" | summarize count() by tostring(properties.storageProfile.osDisk.osType)",
+"docLink": "http://localhost:29013/Api/Values/GET?id=0"
+}, 
+{
+"category": "Azure Resource Graph",
+"method": "GET",
+"humanName": "get linux vm's",
+"requestUrl": "https://management.azure.com/providers/Microsoft.ResourcesTopology.PPE/resources?api-version=2017-10-05-preview&filter=where properties.storageProfile.osDisk.osType contains \"Linux\" | project name",
+"docLink": "http://localhost:29013/Api/Values/GET?id=0"
+}, 
+{
+    "category": "Azure Resource Graph",
     "method": "GET",
-    "humanName": "get summary by type",
+    "humanName": "get resources type summary",
     "requestUrl": "https://management.azure.com/providers/Microsoft.ResourcesTopology.PPE/resources?api-version=2017-10-05-preview&filter=summarize count() by type|sort by count_ desc",
     "docLink": "http://localhost:29013/Api/Values/GET?id=0"
 }, 
 {
-    "category": "Azure",
+    "category": "Azure Resource Graph",
     "method": "GET",
-    "humanName": "get summary by subscription",
+    "humanName": "get subscriptions summary",
     "requestUrl": "https://management.azure.com/providers/Microsoft.ResourcesTopology.PPE/resources?api-version=2017-10-05-preview&filter=summarize count() by subscriptionId|sort by count_ desc",
     "docLink": "http://localhost:29013/Api/Values/GET?id=0"
 }, 
 {
-    "category": "Azure",
+    "category": "Azure Resource Graph",
     "method": "GET",
-    "humanName": "get summary by location",
+    "humanName": "get resources location summary",
     "requestUrl": "https://management.azure.com/providers/Microsoft.ResourcesTopology.PPE/resources?api-version=2017-10-05-preview&filter=summarize count() by location|sort by count_ desc",
     "docLink": "http://localhost:29013/Api/Values/GET?id=0"
 }, 
 {
-    "category": "Azure",
+    "category": "Azure Resource Graph",
     "method": "GET",
-    "humanName": "get summary by resource group",
+    "humanName": "get resource group summary",
     "requestUrl": "https://management.azure.com/providers/Microsoft.ResourcesTopology.PPE/resources?api-version=2017-10-05-preview&filter=summarize count() by resourceGroup|sort by count_ desc",
     "docLink": "http://localhost:29013/Api/Values/GET?id=0"
 }]
