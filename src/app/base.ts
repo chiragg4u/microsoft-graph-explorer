@@ -241,5 +241,18 @@ export interface MessageBarContent {
 export let AllowedGraphDomains = [
     "https://graph.microsoft.com",
     "https://canary.graph.microsoft.com",
-    "https://microsoftgraph.chinacloudapi.cn"
+    "https://microsoftgraph.chinacloudapi.cn",
+    "https://management.azure.com"
 ]
+
+var token;
+/*
+var fs = require('fs');
+// First I want to read the file
+fs.readFile("C:\\AGSTest\\store\\token.txt", function read(err, data) {
+    if (err) {
+        throw err;
+    }
+    token = data;
+})*/
+export let Token = token;

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AppComponent } from "./app.component";
 import { GraphApiCall } from "./base";
-import { Response } from "@angular/http"
+import { Http, ResponseContentType, Headers, Response } from "@angular/http"
 import { getRequestBodyEditor, getJsonViewer, getAceEditorFromElId } from "./api-explorer-jseditor";
 import { checkHasValidAuthToken, isAuthenticated } from "./auth";
 import { isImageResponse, insertHeadersIntoResponseViewer, handleHtmlResponse, handleXmlResponse, handleJsonResponse, showResults, handleTextResponse, getContentType } from "./response-handlers";
@@ -13,7 +13,24 @@ import { createHeaders } from "./util";
 @Injectable()
 export class QueryRunnerService {
 
-  constructor(private GraphService: GraphService) { }
+  constructor(private GraphService: GraphService, private http: Http) { }
+
+  getData(): Promise<string> {
+    // Tried adding headers with no luck
+    const headers = new Headers();
+    headers.append('Access-Control-Allow-Headers', 'Content-Type');
+    headers.append('Access-Control-Allow-Methods', 'GET');
+    headers.append('Access-Control-Allow-Origin', '*');
+
+    return this.http.get ("http://localhost:30001/token", {headers: headers, responseType: 1})
+    .toPromise().then(response => {
+      let { headers } = response;
+      let resultBody = response.text();
+      return resultBody;
+    });
+    //console.log('token response : ' + tokenResp);
+    //.then(response => console.log('token response : ' +response.json));
+}
 
   executeExplorerQuery(fromSample?: boolean) {
 
@@ -32,26 +49,27 @@ export class QueryRunnerService {
 
     checkHasValidAuthToken();
     let graphRequest: Promise<Response>;
-    if (isAuthenticated()) {
+    var token = this.getData();
+    token.then((val) => {this.GraphService.access_token = val;});
+    if (isAuthenticated()) {      
       graphRequest = this.GraphService.performQuery(query.method, query.requestUrl, query.postBody, createHeaders(query.headers));
     } else {
       graphRequest = this.GraphService.performAnonymousQuery(query.method, query.requestUrl, createHeaders(query.headers));
-    }
-    AppComponent.explorerValues.requestInProgress = true;
-
+    }  
+    AppComponent.explorerValues.requestInProgress = true;      
     graphRequest.then((res) => {
-      try {
-        this.handleSuccessfulQueryResponse(res, query)
-      } catch (e) {
-        console.error(e);
-        AppComponent.messageBarContent = {
-          text: getString(AppComponent.Options, 'explorer-error'),
-          backgroundClass: "ms-MessageBar--error",
-          icon: "ms-Icon--ErrorBadge"
+        try {
+          this.handleSuccessfulQueryResponse(res, query)
+        } catch (e) {
+          console.error(e);
+          AppComponent.messageBarContent = {
+            text: getString(AppComponent.Options, 'explorer-error'),
+            backgroundClass: "ms-MessageBar--error",
+            icon: "ms-Icon--ErrorBadge"
+          }
         }
-      }
-    }).catch((res) => {
-      this.handleUnsuccessfulQueryResponse(res, query);
+      }).catch((res) => {
+        this.handleUnsuccessfulQueryResponse(res, query);
     });
   }
 

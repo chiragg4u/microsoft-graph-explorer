@@ -1011,4 +1011,11 @@ export const SampleQueries: SampleQuery[] = [
     "humanName": "get recent user activities",
     "requestUrl": "/v1.0/me/activities/recent",
     "docLink": "https://developer.microsoft.com/en-us/graph/docs/api-reference/v1.0/api/projectrome_get_recent_activities"
+},
+{
+    "category": "Azure",
+    "method": "GET",
+    "humanName": "get user subscriptions",
+    "requestUrl": "/v1.0/me/activities/recent",
+    "docLink": "http://localhost:29013/Api/Values/GET?id=0"
 }]
