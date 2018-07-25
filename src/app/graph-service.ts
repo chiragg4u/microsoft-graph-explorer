@@ -233,7 +233,7 @@ export class GraphService {
         }
 
         //var tokenResp = this.getData(); // this.http.get("http://localhost:30001/token").toPromise().then(response => response.json);
-        console.log("tokenResp: " + this.access_token);        
+        //console.log("tokenResp: " + this.access_token);        
                           
         if(query.startsWith("https://management.azure.com")) {
             
@@ -241,7 +241,7 @@ export class GraphService {
         }
         else {
             var authResp = hello.getAuthResponse('msft');
-            console.log("AuthResponse: " + JSON.stringify(authResp))                       
+            //console.log("AuthResponse: " + JSON.stringify(authResp))                       
             requestHeaders.append("Authorization", `Bearer ${authResp.access_token}`)
         }
 
