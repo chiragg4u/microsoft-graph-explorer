@@ -1016,6 +1016,34 @@ export const SampleQueries: SampleQuery[] = [
     "category": "Azure",
     "method": "GET",
     "humanName": "get user subscriptions",
-    "requestUrl": "/v1.0/me/activities/recent",
+    "requestUrl": "https://management.azure.com/subscriptions?api-version=2016-06-01",
+    "docLink": "http://localhost:29013/Api/Values/GET?id=0"
+}, 
+{
+    "category": "Azure",
+    "method": "GET",
+    "humanName": "get summary by type",
+    "requestUrl": "https://management.azure.com/providers/Microsoft.ResourcesTopology.PPE/resources?api-version=2017-10-05-preview&filter=summarize count() by type|sort by count_ desc",
+    "docLink": "http://localhost:29013/Api/Values/GET?id=0"
+}, 
+{
+    "category": "Azure",
+    "method": "GET",
+    "humanName": "get summary by subscription",
+    "requestUrl": "https://management.azure.com/providers/Microsoft.ResourcesTopology.PPE/resources?api-version=2017-10-05-preview&filter=summarize count() by subscriptionId|sort by count_ desc",
+    "docLink": "http://localhost:29013/Api/Values/GET?id=0"
+}, 
+{
+    "category": "Azure",
+    "method": "GET",
+    "humanName": "get summary by location",
+    "requestUrl": "https://management.azure.com/providers/Microsoft.ResourcesTopology.PPE/resources?api-version=2017-10-05-preview&filter=summarize count() by location|sort by count_ desc",
+    "docLink": "http://localhost:29013/Api/Values/GET?id=0"
+}, 
+{
+    "category": "Azure",
+    "method": "GET",
+    "humanName": "get summary by resource group",
+    "requestUrl": "https://management.azure.com/providers/Microsoft.ResourcesTopology.PPE/resources?api-version=2017-10-05-preview&filter=summarize count() by resourceGroup|sort by count_ desc",
     "docLink": "http://localhost:29013/Api/Values/GET?id=0"
 }]
